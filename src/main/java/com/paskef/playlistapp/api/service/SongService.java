@@ -1,5 +1,6 @@
 package com.paskef.playlistapp.api.service;
 
+import com.paskef.playlistapp.exception.EntityNotFoundException;
 import com.paskef.playlistapp.model.Album;
 import com.paskef.playlistapp.model.Song;
 import com.paskef.playlistapp.repository.AlbumRepository;
@@ -24,7 +25,7 @@ public class SongService {
     }
 
     public Song addSong(Song song, Integer albumId){
-        Album album = albumRepository.findById(albumId).orElse(null); // lançar exception dps
+        Album album = albumRepository.findById(albumId).orElseThrow(() -> new EntityNotFoundException("Album with id " + albumId + " not found!"));
         song.setAlbum(album);
         return songRepository.save(song);
     }
@@ -34,19 +35,13 @@ public class SongService {
     }
 
     public Song updateSong(int id, Song newsong, Integer albumId) {
-        Song existingSong = songRepository.findById(id).orElse(null);
-        Album album = albumRepository.findById(albumId).orElse(null);
-        if (existingSong != null) {
+        Song existingSong = songRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Song with id " + id + "not found!"));
+        Album album = albumRepository.findById(albumId).orElseThrow(() -> new EntityNotFoundException("Album with id " + albumId + " not found!"));
+
             existingSong.setTitle(newsong.getTitle());
             existingSong.setDuration(newsong.getDuration());
             existingSong.setLiked(newsong.getLiked());
-
-            if (album != null) {
-                existingSong.setAlbum(album);
-            }
-
             return songRepository.save(existingSong);
-        }
-        return null;
+
     }
 }

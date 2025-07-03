@@ -2,6 +2,8 @@ package com.paskef.playlistapp.model;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 public class Song {
     @Id
@@ -16,11 +18,12 @@ public class Song {
     @JoinColumn(name = "album_id")
     private Album album;
 
-    // no-args constructor
+    @ManyToMany (mappedBy = "songs")
+    private List<Playlist> playlists;
+
     public Song() {
     }
 
-    // args constructor
     public Song(String title, int duration, boolean liked, Album album) {
         this.title = title;
         this.duration = duration;
@@ -28,7 +31,6 @@ public class Song {
         this.album = album;
     }
 
-    //getters and setters
     public int getId() {
         return id;
     }

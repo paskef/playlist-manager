@@ -1,5 +1,6 @@
 package com.paskef.playlistapp.api.service;
 
+import com.paskef.playlistapp.exception.EntityNotFoundException;
 import com.paskef.playlistapp.model.Album;
 import com.paskef.playlistapp.repository.AlbumRepository;
 import org.springframework.stereotype.Service;
@@ -24,17 +25,14 @@ public class AlbumService {
     }
 
     public Album updateAlbum(int id, Album newAlbum) {
-        Album existingAlbum = albumRepository.findById(id).orElse(null);
+        Album existingAlbum = albumRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Álbum com id " + id + " não encontrado"));
 
-        if (existingAlbum != null) {
             existingAlbum.setArtist(newAlbum.getArtist());
             existingAlbum.setCoverUrl(newAlbum.getCoverUrl());
             existingAlbum.setTitle(newAlbum.getTitle());
             existingAlbum.setReleaseDate(newAlbum.getReleaseDate());
-
             return albumRepository.save(existingAlbum);
-        }
-        return null;
+
     }
     public void removeAlbum(int id){
         albumRepository.deleteById(id);
