@@ -44,4 +44,10 @@ public class SongService {
             return songRepository.save(existingSong);
 
     }
+
+    public Song getSongById(int id) {
+        return songRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Song with id " + id + "not found!"));
+    }
+
+
 }

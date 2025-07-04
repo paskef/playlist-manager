@@ -25,7 +25,7 @@ public class AlbumService {
     }
 
     public Album updateAlbum(int id, Album newAlbum) {
-        Album existingAlbum = albumRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Álbum com id " + id + " não encontrado"));
+        Album existingAlbum = albumRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Album with id " + id + " not found"));
 
             existingAlbum.setArtist(newAlbum.getArtist());
             existingAlbum.setCoverUrl(newAlbum.getCoverUrl());

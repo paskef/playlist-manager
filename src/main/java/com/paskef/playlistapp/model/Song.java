@@ -13,6 +13,7 @@ public class Song {
 
     private String title;
     private int duration;
+    private String gender;
     private boolean liked = false;
 
     @ManyToOne
@@ -22,12 +23,14 @@ public class Song {
     @ManyToMany (mappedBy = "songs")
     private List<Playlist> playlists;
 
-    public Song() {
+    public Song(String gender) {
+        this.gender = gender;
     }
 
-    public Song(String title, int duration, boolean liked, Album album) {
+    public Song(String title, int duration, String gender, boolean liked, Album album) {
         this.title = title;
         this.duration = duration;
+        this.gender = gender;
         this.liked = liked;
         this.album = album;
     }
@@ -66,6 +69,14 @@ public class Song {
 
     public void setAlbum(Album album) {
         this.album = album;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
     }
 }
 
