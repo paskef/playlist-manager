@@ -22,6 +22,9 @@ public class CreateAlbumDTO {
     @Size(min = 1, message = "Album should contain at least one song!")
     private List<Song> songs;
 
+    @Pattern(regexp = "^https?://", message = "Must be a valid URL!")
+    private String coverUrl;
+
     public String getTitle() {
         return title;
     }
@@ -52,5 +55,13 @@ public class CreateAlbumDTO {
 
     public void setSongs(List<Song> songs) {
         this.songs = songs;
+    }
+
+    public String getCoverUrl() {
+        return coverUrl;
+    }
+
+    public void setCoverUrl(String coverUrl) {
+        this.coverUrl = coverUrl;
     }
 }
