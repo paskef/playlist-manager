@@ -1,7 +1,7 @@
 package com.paskef.playlistapp.api.dto.song;
 
 import com.paskef.playlistapp.api.dto.album.AlbumInfoDTO;
-import com.paskef.playlistapp.exception.AlbumNotFoundException;
+import com.paskef.playlistapp.exception.EntityNotFoundException;
 import com.paskef.playlistapp.model.Song;
 
 public class SongResponseDTO {
@@ -20,7 +20,7 @@ public class SongResponseDTO {
         if (song.getAlbum() != null) {
             this.album = new AlbumInfoDTO(song.getAlbum().getTitle(), song.getAlbum().getArtist(), song.getAlbum().getCoverUrl(), song.getAlbum().getReleaseDate());
         } else {
-            throw new AlbumNotFoundException("Album not found for song: " + song.getTitle());
+            throw new EntityNotFoundException("Album not found for song: " + song.getTitle());
         }
     }
 
