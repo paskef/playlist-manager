@@ -1,5 +1,7 @@
 package com.paskef.playlistapp.api.service;
 
+import com.paskef.playlistapp.api.dto.song.CreateSongDTO;
+import com.paskef.playlistapp.api.dto.song.UpdateSongDTO;
 import com.paskef.playlistapp.exception.EntityNotFoundException;
 import com.paskef.playlistapp.model.Album;
 import com.paskef.playlistapp.model.Song;
@@ -24,9 +26,9 @@ public class SongService {
         return songRepository.findAll();
     }
 
-    public Song addSong(Song song, Integer albumId){
+    public Song addSong(CreateSongDTO songDTO, Integer albumId) {
         Album album = albumRepository.findById(albumId).orElseThrow(() -> new EntityNotFoundException("Album with id " + albumId + " not found!"));
-        song.setAlbum(album);
+        Song song = new Song(songDTO, album);
         return songRepository.save(song);
     }
 
@@ -39,14 +41,14 @@ public class SongService {
 
     }
 
-    public Song updateSong(int id, Song newSong, Integer albumId) {
+    public Song updateSong(int id, UpdateSongDTO updateSongDTO, Integer albumId) {
         Song existingSong = songRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Song with id " + id + " not found!"));
 
-        existingSong.setTitle(newSong.getTitle());
-        existingSong.setDuration(newSong.getDuration());
-        existingSong.setLiked(newSong.getLiked());
-        existingSong.setGender(newSong.getGender());
+        existingSong.setTitle(updateSongDTO.getTitle());
+        existingSong.setDuration(updateSongDTO.getDuration());
+        existingSong.setGender(updateSongDTO.getGender());
+        existingSong.setLiked(updateSongDTO.isLiked());
 
         if (albumId != null) {
             Album album = albumRepository.findById(albumId)
@@ -56,7 +58,6 @@ public class SongService {
 
         return songRepository.save(existingSong);
     }
-
 
     public Song getSongById(int id) {
         return songRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Song with id " + id + " not found!"));

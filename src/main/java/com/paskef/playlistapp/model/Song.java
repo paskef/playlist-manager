@@ -1,5 +1,6 @@
 package com.paskef.playlistapp.model;
 
+import com.paskef.playlistapp.api.dto.song.CreateSongDTO;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -32,6 +33,14 @@ public class Song {
         this.duration = duration;
         this.gender = gender;
         this.liked = liked;
+        this.album = album;
+    }
+
+    public Song(CreateSongDTO dto, Album album) {
+        this.title = dto.getTitle();
+        this.duration = dto.getDuration();
+        this.gender = dto.getGender();
+        this.liked = dto.isLiked();
         this.album = album;
     }
 

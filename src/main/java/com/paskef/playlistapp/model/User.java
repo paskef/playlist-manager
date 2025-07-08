@@ -1,5 +1,6 @@
 package com.paskef.playlistapp.model;
 
+import com.paskef.playlistapp.api.dto.user.CreateUserDTO;
 import jakarta.persistence.*;
 
 @Entity
@@ -22,6 +23,12 @@ public class User {
         this.username = username;
         this.password = password;
         this.email = email;
+    }
+
+    public User (CreateUserDTO userDTO) {
+        this.username = userDTO.getUsername();
+        this.password = userDTO.getPassword();
+        this.email = userDTO.getEmail();
     }
 
     public int getId() {

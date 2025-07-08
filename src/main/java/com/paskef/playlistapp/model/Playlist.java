@@ -1,5 +1,6 @@
 package com.paskef.playlistapp.model;
 
+import com.paskef.playlistapp.api.dto.playlist.CreatePlaylistDTO;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
@@ -20,12 +21,11 @@ public class Playlist {
             joinColumns = @JoinColumn(name = "playlist_id"),
             inverseJoinColumns = @JoinColumn(name = "song_id")
     )
+    private List<Song> songs = new ArrayList<>();
 
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
-
-    private List<Song> songs = new ArrayList<>();
 
     public Playlist(){
     }
@@ -35,6 +35,11 @@ public class Playlist {
         this.name = name;
         this.coverUrl = coverUrl;
         this.songs = songs;
+    }
+
+    public Playlist(CreatePlaylistDTO playlistDTO) {
+        this.name = playlistDTO.getName();
+        this.coverUrl = playlistDTO.getCoverUrl();
     }
 
 
@@ -68,5 +73,14 @@ public class Playlist {
 
     public void setSongs(List<Song> songs) {
         this.songs = songs;
+    }
+
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }
