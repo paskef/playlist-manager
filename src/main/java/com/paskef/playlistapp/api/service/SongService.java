@@ -31,22 +31,35 @@ public class SongService {
     }
 
     public void removeSong(int id){
-        songRepository.deleteById(id);
-    }
-
-    public Song updateSong(int id, Song newsong, Integer albumId) {
-        Song existingSong = songRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Song with id " + id + "not found!"));
-        Album album = albumRepository.findById(albumId).orElseThrow(() -> new EntityNotFoundException("Album with id " + albumId + " not found!"));
-
-            existingSong.setTitle(newsong.getTitle());
-            existingSong.setDuration(newsong.getDuration());
-            existingSong.setLiked(newsong.getLiked());
-            return songRepository.save(existingSong);
+        if (songRepository.existsById(id)) {
+            songRepository.deleteById(id);
+        } else {
+            throw new EntityNotFoundException("Song with id " + id + " not found!");
+        }
 
     }
+
+    public Song updateSong(int id, Song newSong, Integer albumId) {
+        Song existingSong = songRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Song with id " + id + " not found!"));
+
+        existingSong.setTitle(newSong.getTitle());
+        existingSong.setDuration(newSong.getDuration());
+        existingSong.setLiked(newSong.getLiked());
+        existingSong.setGender(newSong.getGender());
+
+        if (albumId != null) {
+            Album album = albumRepository.findById(albumId)
+                    .orElseThrow(() -> new EntityNotFoundException("Album with id " + albumId + " not found!"));
+            existingSong.setAlbum(album);
+        }
+
+        return songRepository.save(existingSong);
+    }
+
 
     public Song getSongById(int id) {
-        return songRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Song with id " + id + "not found!"));
+        return songRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Song with id " + id + " not found!"));
     }
 
 

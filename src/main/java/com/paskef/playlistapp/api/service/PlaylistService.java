@@ -21,7 +21,11 @@ public class PlaylistService {
     }
 
     public void removePlaylist(int id) {
-        playlistRepository.deleteById(id);
+        if (playlistRepository.existsById(id)) {
+            playlistRepository.deleteById(id);
+        } else {
+            throw new EntityNotFoundException("Playlist with id " + id + " not found!");
+        }
     }
 
     public Playlist addPlaylist(Playlist playlist){

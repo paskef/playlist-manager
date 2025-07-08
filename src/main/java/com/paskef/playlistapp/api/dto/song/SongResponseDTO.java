@@ -6,6 +6,7 @@ import com.paskef.playlistapp.model.Song;
 
 public class SongResponseDTO {
 
+    private int id;
     private String title;
     private int duration;
     private String gender;
@@ -13,6 +14,7 @@ public class SongResponseDTO {
     private AlbumInfoDTO album;
 
     public SongResponseDTO(Song song) {
+        this.id = song.getId();
         this.title = song.getTitle();
         this.duration = song.getDuration();
         this.gender = song.getGender();
@@ -20,8 +22,16 @@ public class SongResponseDTO {
         if (song.getAlbum() != null) {
             this.album = new AlbumInfoDTO(song.getAlbum().getTitle(), song.getAlbum().getArtist(), song.getAlbum().getCoverUrl(), song.getAlbum().getReleaseDate());
         } else {
-            throw new EntityNotFoundException("Album not found for song: " + song.getTitle());
+            album = null;
         }
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id){
+        this.id = id;
     }
 
     public String getTitle() {

@@ -16,7 +16,16 @@ public class UserService {
     }
 
     public void removeUser(int id){
-        userRepository.deleteById(id);
+        if (userRepository.existsById(id)) {
+            userRepository.deleteById(id);
+        } else {
+            throw new EntityNotFoundException("User with id " + id + " not found!");
+        }
+    }
+
+    public User getUserById(int id) {
+        return userRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("User with id " + id + " not found!"));
     }
 
     public User addUser(User user){
@@ -28,7 +37,7 @@ public class UserService {
     }
 
     public User updateUser(int id, User updatedUser){
-        User existingUser = userRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("User with id " + id + "not found!"));
+        User existingUser = userRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("User with id " + id + " not found!"));
         existingUser.setUsername(updatedUser.getUsername());
         existingUser.setEmail(updatedUser.getEmail());
         existingUser.setPassword(updatedUser.getPassword());
