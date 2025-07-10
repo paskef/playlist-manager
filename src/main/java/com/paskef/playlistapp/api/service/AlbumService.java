@@ -1,5 +1,7 @@
 package com.paskef.playlistapp.api.service;
 
+import com.paskef.playlistapp.api.dto.album.CreateAlbumDTO;
+import com.paskef.playlistapp.api.dto.album.UpdateAlbumDTO;
 import com.paskef.playlistapp.exception.EntityNotFoundException;
 import com.paskef.playlistapp.model.Album;
 import com.paskef.playlistapp.repository.AlbumRepository;
@@ -20,17 +22,18 @@ public class AlbumService {
         return albumRepository.findAll();
     }
 
-    public Album addAlbum(Album album){
+    public Album addAlbum(CreateAlbumDTO albumDTO){
+        Album album = new Album(albumDTO);
         return albumRepository.save(album);
     }
 
-    public Album updateAlbum(int id, Album newAlbum) {
+    public Album updateAlbum(int id, UpdateAlbumDTO updateAlbumDTO) {
         Album existingAlbum = albumRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Album with id " + id + " not found"));
 
-            existingAlbum.setArtist(newAlbum.getArtist());
-            existingAlbum.setCoverUrl(newAlbum.getCoverUrl());
-            existingAlbum.setTitle(newAlbum.getTitle());
-            existingAlbum.setReleaseDate(newAlbum.getReleaseDate());
+            existingAlbum.setArtist(updateAlbumDTO.getArtist());
+            existingAlbum.setCoverUrl(updateAlbumDTO.getCoverUrl());
+            existingAlbum.setTitle(updateAlbumDTO.getTitle());
+            existingAlbum.setReleaseDate(updateAlbumDTO.getReleaseDate());
             return albumRepository.save(existingAlbum);
 
     }

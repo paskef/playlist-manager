@@ -1,5 +1,6 @@
 package com.paskef.playlistapp.model;
 
+import com.paskef.playlistapp.api.dto.album.CreateAlbumDTO;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
@@ -28,6 +29,13 @@ public class Album {
         this.artist = artist;
         this.releaseDate = releaseDate;
         this.coverUrl = coverUrl;
+    }
+
+    public Album(CreateAlbumDTO albumDTO) {
+        this.title = albumDTO.getTitle();
+        this.artist = albumDTO.getArtist();
+        this.releaseDate = albumDTO.getReleaseDate();
+        this.coverUrl = albumDTO.getCoverUrl();
     }
 
     public int getId() {
