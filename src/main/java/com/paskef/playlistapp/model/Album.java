@@ -77,4 +77,12 @@ public class Album {
     public void setCoverUrl(String coverUrl) {
         this.coverUrl = coverUrl;
     }
+
+    public List<Song> getSongs() {
+        return songs;
+    }
+
+    public void setSongs(List<Song> songs) {
+        this.songs = songs;
+    }
 }

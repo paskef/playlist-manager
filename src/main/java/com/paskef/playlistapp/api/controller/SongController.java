@@ -1,9 +1,7 @@
 package com.paskef.playlistapp.api.controller;
 
 import com.paskef.playlistapp.api.dto.album.AlbumInfoDTO;
-import com.paskef.playlistapp.api.dto.song.CreateSongDTO;
-import com.paskef.playlistapp.api.dto.song.SongResponseDTO;
-import com.paskef.playlistapp.api.dto.song.UpdateSongDTO;
+import com.paskef.playlistapp.api.dto.song.*;
 import com.paskef.playlistapp.api.service.SongService;
 import com.paskef.playlistapp.model.Song;
 import org.springframework.http.HttpStatus;
@@ -55,7 +53,7 @@ public class SongController {
     @PutMapping("/{id}")
     public ResponseEntity<SongResponseDTO> updateSong(@PathVariable int id,
                                                       @RequestBody UpdateSongDTO updateSongDTO,
-                                                      @RequestParam(required = false) Integer albumId) {
+                                                      @RequestParam Integer albumId) {
         Song updated = songService.updateSong(id, updateSongDTO, albumId);
         SongResponseDTO response = new SongResponseDTO(updated);
         return ResponseEntity.ok(response);

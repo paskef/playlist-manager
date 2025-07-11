@@ -1,5 +1,7 @@
 package com.paskef.playlistapp.api.dto.album;
 
+import com.paskef.playlistapp.model.Album;
+
 import java.time.LocalDate;
 
 public class AlbumInfoDTO {
@@ -14,6 +16,9 @@ public class AlbumInfoDTO {
         this.artist = artist;
         this.releaseDate = releaseDate;
         this.coverUrl = coverUrl;
+    }
+
+    public AlbumInfoDTO(Album album) {
     }
 
     public String getTitle() {
