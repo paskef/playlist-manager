@@ -19,8 +19,6 @@ public class CreateAlbumDTO {
     @Past(message = "Release date must be in the past!")
     private LocalDate releaseDate;
 
-    @Size(min = 1, message = "Album should contain at least one song!")
-    private List<Song> songs;
 
     @Pattern(regexp = "^https?://", message = "Must be a valid URL!")
     private String coverUrl;
@@ -47,14 +45,6 @@ public class CreateAlbumDTO {
 
     public void setReleaseDate(LocalDate releaseDate) {
         this.releaseDate = releaseDate;
-    }
-
-    public List<Song> getSongs() {
-        return songs;
-    }
-
-    public void setSongs(List<Song> songs) {
-        this.songs = songs;
     }
 
     public String getCoverUrl() {

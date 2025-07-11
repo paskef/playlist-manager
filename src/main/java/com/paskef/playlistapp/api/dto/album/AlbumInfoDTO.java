@@ -19,6 +19,10 @@ public class AlbumInfoDTO {
     }
 
     public AlbumInfoDTO(Album album) {
+        this.title = album.getTitle();
+        this.artist = album.getArtist();
+        this.releaseDate = album.getReleaseDate();
+        this.coverUrl = album.getCoverUrl();
     }
 
     public String getTitle() {
