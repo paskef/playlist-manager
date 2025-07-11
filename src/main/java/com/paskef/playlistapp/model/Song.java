@@ -24,8 +24,7 @@ public class Song {
     @ManyToMany (mappedBy = "songs")
     private List<Playlist> playlists;
 
-    public Song(String gender) {
-        this.gender = gender;
+    public Song() {
     }
 
     public Song(String title, int duration, String gender, boolean liked, Album album) {

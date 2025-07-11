@@ -1,5 +1,6 @@
 package com.paskef.playlistapp.api.service;
 
+import com.paskef.playlistapp.api.dto.album.AlbumInfoDTO;
 import com.paskef.playlistapp.api.dto.song.CreateSongDTO;
 import com.paskef.playlistapp.api.dto.song.UpdateSongDTO;
 import com.paskef.playlistapp.exception.EntityNotFoundException;
@@ -63,5 +64,9 @@ public class SongService {
         return songRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Song with id " + id + " not found!"));
     }
 
-
+    public AlbumInfoDTO getAlbumInfoBySongId(int id) {
+        Song song = songRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Song with id " + id + " not found!"));
+        Album album = song.getAlbum();
+        return new AlbumInfoDTO(album.getTitle(), album.getArtist(), album.getCoverUrl(), album.getReleaseDate() );
+    }
 }
