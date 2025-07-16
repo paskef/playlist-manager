@@ -21,31 +21,17 @@ public class PlaylistResponseDTO {
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
 
     public String getCoverUrl() {
         return coverUrl;
-    }
-
-    public void setCoverUrl(String coverUrl) {
-        this.coverUrl = coverUrl;
     }
 
     public List<SongResponseDTO> getSongs() {
         return songs;
     }
 
-    public void setSongs(List<SongResponseDTO> songs) {
-        this.songs = songs;
-    }
 }

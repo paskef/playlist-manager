@@ -1,5 +1,9 @@
+package com.paskef.playlistapp.api.service;
+
 import com.paskef.playlistapp.api.dto.user.CreateUserDTO;
+import com.paskef.playlistapp.api.dto.user.LoginUserDTO;
 import com.paskef.playlistapp.api.dto.user.UpdateUserDTO;
+import com.paskef.playlistapp.api.dto.user.UserResponseDTO;
 import com.paskef.playlistapp.exception.EntityNotFoundException;
 import com.paskef.playlistapp.model.User;
 import com.paskef.playlistapp.repository.UserRepository;
@@ -45,4 +49,10 @@ public class UserService {
 
         return userRepository.save(existingUser);
     }
+
+    public UserResponseDTO login(LoginUserDTO loginDTO) {
+        // TODO: implement login method
+        return null;
+    }
+
 }

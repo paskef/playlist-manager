@@ -29,31 +29,17 @@ public class AlbumInfoDTO {
         return title;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
     public String getArtist() {
         return artist;
-    }
-
-    public void setArtist(String artist) {
-        this.artist = artist;
     }
 
     public LocalDate getReleaseDate() {
         return releaseDate;
     }
 
-    public void setReleaseDate(LocalDate releaseDate) {
-        this.releaseDate = releaseDate;
-    }
 
     public String getCoverUrl() {
         return coverUrl;
     }
 
-    public void setCoverUrl(String coverUrl) {
-        this.coverUrl = coverUrl;
-    }
 }
